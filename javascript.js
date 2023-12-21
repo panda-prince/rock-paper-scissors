@@ -8,6 +8,11 @@ Grab choices from array then
 Compare each entry to the player input in lowercase form.
 -----
 
+---
+rock beats scissors      0 beats 2
+paper beats rock         1 beats 0
+scissors beats paper     2 beats 1
+---
 */
 
 
@@ -15,9 +20,17 @@ let choices = ["rock", "paper", "scissors"]
 let button = document.getElementById("play-again");
 function playAgain() {
     playerInput();
-    getComputerChoice();
 }
 
+//Computer makes its own choice
+let getComputerChoice = () => {
+    let computerChoice = choices[Math.floor(Math.random() * 3)];
+    console.log(computerChoice);
+    return computerChoice;
+};
+const computerSelection = getComputerChoice();
+
+//Grabs player input and checks choice or asks again.
 /*let getPlayerChoice = () => {
     let newPlayerInput = String(prompt("Rock, Paper, Scissors! Shoot!"));
     console.log(newPlayerInput);
@@ -25,7 +38,6 @@ function playAgain() {
 }
 getPlayerChoice();*/
 
-//Grabs player input and checks choice or asks again.
 function playerInput() {
     let input = String(prompt("Rock, Paper, Scissors! Shoot!").toLowerCase());
     if (choices.includes(input)){
@@ -33,15 +45,15 @@ function playerInput() {
         return input;
     } else {
         console.log("That's not an option!!!");
+        input = null
         playerInput();
     }
 
 };
-playerInput();
+const playerSelection = playerInput();
 
-
-/*
-Alternative to checking player choice
+//--------------------------------------
+/*Alternative to checking player choice
 -------------------------------------------
 let playerChoice = playerInput().toLowerCase();
 
@@ -63,13 +75,36 @@ for (let i=0; i <= choice.length; i++) {
         console.log("That's not an option!!!");
     };
 };
+--------------------------------------------------------
 */
 
-//Computer makes its own choice
-let getComputerChoice = () => {
-    let computerChoice = choices[Math.floor(Math.random() * 3)];
-    console.log(computerChoice);
-    return computerChoice;
-};
 
-const computerSelection = getComputerChoice();
+//Function takes two parameters, player and computer, to play a round.
+//then compares the two choices according to game rules 
+//(If computer chose _  and player chose _, then ? won?) 
+//Console logged string to delcare winner.
+function playRound(computerSelection, playerSelection){
+    if (computerSelection == "rock" && playerSelection == "paper") {
+        console.log("You win! Paper beats Rock!");
+        return;
+    } else if (computerSelection == "paper" && playerSelection == "rock") {
+        console.log("You lose! Paper beats Rock!");
+        return;
+    } else if (computerSelection == "paper" && playerSelection == "scissors") {
+        console.log("You win! Scissors beats Paper!");
+        return;
+    } else if (computerSelection == "scissors" && playerSelection == "paper") {
+        console.log("You lose! Scissors beats Paper!");
+        return;
+    } else if (computerSelection == "scissors" && playerSelection == "rock") {
+        console.log("You win! Rock beats Scissors!");
+        return;
+    } else if (computerSelection == "rock" && playerSelection == "scissors") {
+        console.log("You lose! Rock beats Scissors!");
+        return;
+    } else if (computerSelection == playerSelection){
+        console.log("Tie!");
+        return;
+    }
+};
+console.log(playRound(computerSelection, playerSelection));
