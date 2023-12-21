@@ -15,29 +15,17 @@ scissors beats paper     2 beats 1
 ---
 */
 
-
+//Create array of options for selection.
 let choices = ["rock", "paper", "scissors"]
-let button = document.getElementById("play-again");
-function playAgain() {
-    playerInput();
-}
 
-//Computer makes its own choice
+//Function to randomly choose option for computer.
 let getComputerChoice = () => {
     let computerChoice = choices[Math.floor(Math.random() * 3)];
-    console.log(computerChoice);
     return computerChoice;
 };
 const computerSelection = getComputerChoice();
 
 //Grabs player input and checks choice or asks again.
-/*let getPlayerChoice = () => {
-    let newPlayerInput = String(prompt("Rock, Paper, Scissors! Shoot!"));
-    console.log(newPlayerInput);
-    return newPlayerInput;
-}
-getPlayerChoice();*/
-
 function playerInput() {
     let input = String(prompt("Rock, Paper, Scissors! Shoot!").toLowerCase());
     if (choices.includes(input)){
@@ -45,39 +33,11 @@ function playerInput() {
         return input;
     } else {
         console.log("That's not an option!!!");
-        input = null
-        playerInput();
+        return  playerInput();
     }
 
 };
 const playerSelection = playerInput();
-
-//--------------------------------------
-/*Alternative to checking player choice
--------------------------------------------
-let playerChoice = playerInput().toLowerCase();
-
-if (choice.includes(playerChoice)){
-        console.log(playerChoice);
-    } else {
-        console.log("That's not an option!!!");
-        playerInput();
-}; 
-*/
-
-/*
-
-for (let i=0; i <= choice.length; i++) {
-    if (playerChoice == choice[i]){
-        console.log(playerChoice);
-        break
-    } else {
-        console.log("That's not an option!!!");
-    };
-};
---------------------------------------------------------
-*/
-
 
 //Function takes two parameters, player and computer, to play a round.
 //then compares the two choices according to game rules 
@@ -107,4 +67,5 @@ function playRound(computerSelection, playerSelection){
         return;
     }
 };
+
 console.log(playRound(computerSelection, playerSelection));
